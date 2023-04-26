@@ -1,0 +1,8 @@
+#Proyecto de DSI correspondiente al lado de el Servidor
+
+#Para iniciar clone el repositorio
+
+#En su terminal ingrese el siguiente comando: npm install
+
+#Cree un archivo .env en su carpeta raiz
+#Agrege un puerto como por ejemplo "PORT=8080"

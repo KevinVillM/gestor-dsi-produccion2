@@ -1,0 +1,57 @@
+Date : 2023-05-01 21:13:25
+Directory : c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back
+Total : 23 files,  2233 codes, 18 comments, 119 blanks, all 2370 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      1,712 |          0 |          2 |      1,714 |
+| JavaScript |         20 |        509 |         18 |        117 |        644 |
+| HTML       |          1 |         12 |          0 |          0 |         12 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                             | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                |         23 |      2,233 |         18 |        119 |      2,370 |
+| . (Files)                                                                        |          3 |      1,715 |          1 |          3 |      1,719 |
+| controllers                                                                      |          3 |        152 |          7 |         34 |        193 |
+| database                                                                         |          1 |         18 |          0 |          5 |         23 |
+| helpers                                                                          |          2 |         52 |          0 |          7 |         59 |
+| middlewares                                                                      |          4 |         87 |          3 |         17 |        107 |
+| models                                                                           |          5 |        123 |          6 |         28 |        157 |
+| public                                                                           |          1 |         12 |          0 |          0 |         12 |
+| routes                                                                           |          4 |         74 |          1 |         25 |        100 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                         | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\app.js                        | JavaScript |          3 |          1 |          1 |          5 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\auth.js           | JavaScript |         39 |          4 |          4 |         47 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\proyecto.js       | JavaScript |         54 |          0 |          6 |         60 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\usuario.js        | JavaScript |         59 |          3 |         24 |         86 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\database\configDB.js          | JavaScript |         18 |          0 |          5 |         23 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\helpers\db-validations.js     | JavaScript |         33 |          0 |          5 |         38 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\helpers\generarJWT.js         | JavaScript |         19 |          0 |          2 |         21 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\index.js          | JavaScript |          8 |          0 |          2 |         10 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-campos.js | JavaScript |         11 |          0 |          4 |         15 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-jwt.js    | JavaScript |         34 |          3 |          8 |         45 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-roles.js  | JavaScript |         34 |          0 |          3 |         37 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\proyecto.js            | JavaScript |         33 |          0 |          3 |         36 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\role.js                | JavaScript |          8 |          0 |          5 |         13 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\server.js              | JavaScript |         37 |          6 |         16 |         59 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\tareas.js              | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\usuario.js             | JavaScript |         45 |          0 |          3 |         48 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\package-lock.json             | JSON       |      1,691 |          0 |          1 |      1,692 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\package.json                  | JSON       |         21 |          0 |          1 |         22 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\public\index.html             | HTML       |         12 |          0 |          0 |         12 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\auth.js                | JavaScript |         11 |          0 |          5 |         16 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\proyectos.js           | JavaScript |         25 |          0 |          9 |         34 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\tareas.js              | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\usuario.js             | JavaScript |         38 |          1 |         10 |         49 |
+| Total                                                                            |            |      2,233 |         18 |        119 |      2,370 |
++----------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

@@ -1,0 +1,25 @@
+"filename", "language", "JSON", "JavaScript", "HTML", "comment", "blank", "total"
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\app.js", "JavaScript", 0, 3, 0, 1, 1, 5
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\auth.js", "JavaScript", 0, 39, 0, 4, 4, 47
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\proyecto.js", "JavaScript", 0, 54, 0, 0, 6, 60
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\controllers\usuario.js", "JavaScript", 0, 59, 0, 3, 24, 86
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\database\configDB.js", "JavaScript", 0, 18, 0, 0, 5, 23
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\helpers\db-validations.js", "JavaScript", 0, 33, 0, 0, 5, 38
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\helpers\generarJWT.js", "JavaScript", 0, 19, 0, 0, 2, 21
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\index.js", "JavaScript", 0, 8, 0, 0, 2, 10
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-campos.js", "JavaScript", 0, 11, 0, 0, 4, 15
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-jwt.js", "JavaScript", 0, 34, 0, 3, 8, 45
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\middlewares\validar-roles.js", "JavaScript", 0, 34, 0, 0, 3, 37
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\proyecto.js", "JavaScript", 0, 33, 0, 0, 3, 36
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\role.js", "JavaScript", 0, 8, 0, 0, 5, 13
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\server.js", "JavaScript", 0, 37, 0, 6, 16, 59
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\tareas.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\models\usuario.js", "JavaScript", 0, 45, 0, 0, 3, 48
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\package-lock.json", "JSON", 1691, 0, 0, 0, 1, 1692
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\package.json", "JSON", 21, 0, 0, 0, 1, 22
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\public\index.html", "HTML", 0, 0, 12, 0, 0, 12
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\auth.js", "JavaScript", 0, 11, 0, 0, 5, 16
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\proyectos.js", "JavaScript", 0, 25, 0, 0, 9, 34
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\tareas.js", "JavaScript", 0, 0, 0, 0, 1, 1
+"c:\Users\kevin\Desktop\Kevin\ciclo I 2023\DSI\Back\routes\usuario.js", "JavaScript", 0, 38, 0, 1, 10, 49
+"Total", "-", 1712, 509, 12, 18, 119, 2370

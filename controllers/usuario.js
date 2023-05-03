@@ -44,7 +44,6 @@ const usuariosPut = async(req, res = response) => {
 }
 
 const usuariosPost = async (req, res = response) => {
-    console.log('usuario');
     const {google, ...allData} = req.body;
     const usuario = new Usuario(allData);
 

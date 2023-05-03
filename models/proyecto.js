@@ -21,6 +21,11 @@ const ProyectoSchema = Schema({
         type: Date,
         default: Date.now
     },
+    propietario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: [true, 'El propietario del proyecto es obligatorio']
+    },
     colaboradores: [{
         type: Schema.Types.ObjectId,
         ref: 'Usuario'

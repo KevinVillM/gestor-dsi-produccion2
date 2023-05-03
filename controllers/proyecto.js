@@ -30,7 +30,7 @@ const getUnProyecto = async (req, res = response) => {
 
 const crearProyecto = async (req, res = response) => {
     const {_id, ...resto} = req.body;
-    const proyecto = new Proyecto(resto).populate('colaboradores', 'nombre');
+    const proyecto =await new Proyecto(resto).populate('colaboradores', 'nombre');
     await proyecto.save();
     res.json({
         msg: 'post API - controlador',

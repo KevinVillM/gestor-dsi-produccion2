@@ -11,7 +11,7 @@ const getProyectos = async (req, res = response) => {
 
 const getUnProyecto = async (req, res = response) => {
     const {id} = req.params;
-    const {nombre,descripcion, create_date, ending_date, colaboradores, estado} = await Proyecto.findById(id).populate('colaboradores', 'nombre -_id');
+    const {estado, ...resto} = await Proyecto.findById(id).populate('colaboradores', 'nombre -_id');
 
     if (!estado) {
         return res.status(400).json({
@@ -20,11 +20,7 @@ const getUnProyecto = async (req, res = response) => {
     }
     res.json({
         msg: 'get API - controlador',
-        nombre,
-        descripcion,
-        create_date,
-        ending_date,
-        colaboradores
+        resto
     });
 }
 
@@ -40,8 +36,8 @@ const crearProyecto = async (req, res = response) => {
 
 const actualizarProyecto = async (req, res = response) => {
     const {id} = req.params;
-    const {nombre, descripcion, colaboradores, ending_date,create_date} = req.body;
-    const proyecto = await Proyecto.findByIdAndUpdate(id, {nombre, descripcion, colaboradores, ending_date,create_date});
+    const {nombre, descripcion, colaboradores, ending_date,create_date,  estado_Proyecto} = req.body;
+    const proyecto = await Proyecto.findByIdAndUpdate(id, {nombre, descripcion, colaboradores, ending_date,create_date, estado_Proyecto});
     res.json({
         msg: 'put API - controlador',
         proyecto

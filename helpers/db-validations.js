@@ -1,6 +1,7 @@
 const Proyecto = require('../models/proyecto');
 const Role = require('../models/role');
 const Usuario = require('../models/usuario');
+const Tarea = require('../models/tarea');
 
 const esRolValido = async(rol) => {
     const existeRol = await Role.findOne({rol})
@@ -30,9 +31,17 @@ const proyectoPorID = async(id) => {
     }
 }
 
+const tareaPorID = async(id) => {
+    const tarea = await Tarea.findById(id);
+    if(!tarea){
+        throw new Error(`La tarea con ${id} no existe`)
+    }
+}
+
 module.exports = {
     esRolValido,
     emailExiste,
     usuarioPorID,
-    proyectoPorID
+    proyectoPorID,
+    tareaPorID
 }

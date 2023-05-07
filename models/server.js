@@ -11,7 +11,8 @@ class Server{
         this.path = {
             usuariosPath: '/api/usuarios',
             usuarioAuthPath: '/api/auth',
-            proyestosPath: '/api/proyectos'
+            proyestosPath: '/api/proyectos',
+            tareasPath: '/api/tareas'
         }
 
         // Conectar a base de datos
@@ -44,6 +45,7 @@ class Server{
         this.app.use(this.path.usuariosPath, require('../routes/usuario'));
         this.app.use(this.path.usuarioAuthPath, require('../routes/auth'));
         this.app.use(this.path.proyestosPath, require('../routes/proyectos'));
+        this.app.use(this.path.tareasPath, require('../routes/tareas'));
     }
 
 

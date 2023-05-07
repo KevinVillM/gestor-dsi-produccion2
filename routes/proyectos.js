@@ -29,6 +29,9 @@ router.put('/:id', [
     validarCampos
 ], actualizarProyecto);
 
-router.delete('/:id', validarJWT, eliminarProyecto);
+router.delete('/:id', [
+    validarJWT,
+    check('id').custom(proyectoPorID),
+], eliminarProyecto);
 
 module.exports = router;

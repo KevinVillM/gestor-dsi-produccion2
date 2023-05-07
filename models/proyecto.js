@@ -13,6 +13,10 @@ const ProyectoSchema = Schema({
         type: Boolean,
         default: true
     },
+    estado_Proyecto: {
+        type: String,
+        default: 'En proceso'
+    },
     create_date: {
         type: Date,
         default: Date.now

@@ -30,8 +30,27 @@ const obtenerProyectos = async() => {
   }
   
 
+  const obtenerUsuario = async () => {
+    var raw = "{\r\n    \"email\":\"emailds@gmail.com\",\r\n    \"password\":\"123456\"\r\n}";
 
+    var requestOptions = {
+      method: 'POST',
+      body: raw,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      redirect: 'follow'
+    };
 
+  const usuario = await fetch("http://localhost:8080/api/auth/login", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+    console.log(usuario);
+  }
+  
+  
 
-obtenerProyectos();
+obtenerUsuario();
+//obtenerProyectos();
 

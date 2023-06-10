@@ -31,7 +31,7 @@ const obtenerProyectos = async() => {
   
 
   const obtenerUsuario = async () => {
-    var raw = "{\r\n    \"email\":\"emailds@gmail.com\",\r\n    \"password\":\"123456\"\r\n}";
+    var raw = "{\r\n    \"email\":\"emailds@gmail.com\",\r\n    \"password\":\"1234567\"\r\n}";
 
     var requestOptions = {
       method: 'POST',

@@ -9,6 +9,24 @@ const getProyectos = async (req, res = response) => {
     });
 }
 
+const getProyectosPorUsuarioColaborador = async (req, res = response) => {
+    const {id} = req.params;
+    const proyectos = await Proyecto.find({estado: true, colaboradores: id}).populate('colaboradores', 'nombre -_id');
+    res.json({
+        msg: 'get API - controlador',
+        proyectos
+    });
+}
+
+const getProyectosPorUsuarioCreador = async (req, res = response) => {
+    const {id} = req.params;
+    const proyectos = await Proyecto.find({estado: true, propietario: id}).populate('colaboradores', 'nombre -_id');
+    res.json({
+        msg: 'get API - controlador',
+        proyectos
+    }); 
+}
+
 const getUnProyecto = async (req, res = response) => {
     const {id} = req.params;
     const {estado, ...resto} = await Proyecto.findById(id).populate('colaboradores', 'nombre -_id');
@@ -58,5 +76,7 @@ module.exports = {
     getUnProyecto,
     crearProyecto,
     actualizarProyecto,
-    eliminarProyecto
+    eliminarProyecto,
+    getProyectosPorUsuarioCreador,
+    getProyectosPorUsuarioColaborador
 }

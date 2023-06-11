@@ -2,7 +2,7 @@ const {response} = require('express');
 const Proyecto = require('../models/proyecto');
 
 const getProyectos = async (req, res = response) => {
-    const proyectos = await Proyecto.find({estado: true}).populate('colaboradores', 'nombre -_id');
+    const proyectos = await Proyecto.find({estado: true}).populate('colaboradores', 'nombre _id');
     res.json({
         msg: 'get API - controlador',
         proyectos
@@ -11,7 +11,7 @@ const getProyectos = async (req, res = response) => {
 
 const getProyectosPorUsuarioColaborador = async (req, res = response) => {
     const {id} = req.params;
-    const proyectos = await Proyecto.find({estado: true, colaboradores: id}).populate('colaboradores', 'nombre -_id');
+    const proyectos = await Proyecto.find({estado: true, colaboradores: id}).populate('colaboradores', 'nombre _id');
     res.json({
         msg: 'get API - controlador',
         proyectos
@@ -20,16 +20,25 @@ const getProyectosPorUsuarioColaborador = async (req, res = response) => {
 
 const getProyectosPorUsuarioCreador = async (req, res = response) => {
     const {id} = req.params;
-    const proyectos = await Proyecto.find({estado: true, propietario: id}).populate('colaboradores', 'nombre -_id');
+    const proyectos = await Proyecto.find({estado: true, propietario: id}).populate('colaboradores', 'nombre _id');
     res.json({
         msg: 'get API - controlador',
         proyectos
     }); 
 }
 
+const getProyectosPorUsuario = async (req, res = response) => {
+    const {id} = req.params;
+    const proyectos = await Proyecto.find({estado: true, $or: [{propietario: id}, {colaboradores: id}]}).populate('colaboradores', 'nombre _id');
+    res.json({
+        msg: 'get API - controlador',
+        proyectos
+    });
+}
+
 const getUnProyecto = async (req, res = response) => {
     const {id} = req.params;
-    const {estado, ...resto} = await Proyecto.findById(id).populate('colaboradores', 'nombre -_id');
+    const {estado, ...resto} = await Proyecto.findById(id).populate('colaboradores', 'nombre _id');
 
     if (!estado) {
         return res.status(400).json({
@@ -78,5 +87,6 @@ module.exports = {
     actualizarProyecto,
     eliminarProyecto,
     getProyectosPorUsuarioCreador,
-    getProyectosPorUsuarioColaborador
+    getProyectosPorUsuarioColaborador,
+    getProyectosPorUsuario
 }

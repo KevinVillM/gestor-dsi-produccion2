@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { validarCampos, validarJWT } = require('../middlewares');
 
-const { crearTarea, getTareas, actualizarTarea, eliminarTarea } = require('../controllers/tarea');
+const { crearTarea, getTareas, actualizarTarea, eliminarTarea, getTareasPorProyecto } = require('../controllers/tarea');
 const { tareaPorID, proyectoPorID } = require('../helpers/db-validations');
 const { getUnaTarea } = require('../controllers/tarea');
 
@@ -17,6 +17,13 @@ router.get('/:id', [
     check('id', 'No es un ID valido').isMongoId(),
     validarCampos
 ], getUnaTarea);
+
+router.get('/listadoTareas/:id', [
+    validarJWT,
+    check('id', 'No es un ID valido').isMongoId(),
+    validarCampos
+], getTareasPorProyecto);
+
 
 router.post('/', [
     validarJWT,

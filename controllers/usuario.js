@@ -22,6 +22,15 @@ const usuarioUnoGet = async (req, res = response) => {
     });
 }
 
+const usuarioPorEmailGet = async (req, res = response) => {
+    const {email} = req.params;
+    const usuario = await Usuario.findOne({email});
+    res.json({
+        msg: 'get API - controlador',
+        usuario
+    });
+}
+
 const usuariosPut = async(req, res = response) => {
 
     const id = req.params.id; 
@@ -81,5 +90,6 @@ module.exports = {
     usuariosPut,
     usuariosPost,
     usuariosDelete,
-    usuarioUnoGet
+    usuarioUnoGet,
+    usuarioPorEmailGet
 }

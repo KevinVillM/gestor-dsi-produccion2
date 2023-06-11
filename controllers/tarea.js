@@ -3,6 +3,21 @@ const Tarea = require('../models/tarea');
 
 const getTareas = async (req, res = response) => {
     const tareas = await Tarea.find({estado: true}).populate('asignados', 'nombre -_id').populate('proyecto', 'nombre');
+    //Cambiar el formato de la fecha de creacion y de finalizacion de cada tarea
+    tareas.forEach(tarea => {
+        const fechaCreacion = new Date(tarea.create_date);
+        const fechaFinalizacion = new Date(tarea.ending_date);
+        const diaCreacion = fechaCreacion.getDate();
+        const mesCreacion = fechaCreacion.getMonth() + 1;
+        const anioCreacion = fechaCreacion.getFullYear();
+        const diaFinalizacion = fechaFinalizacion.getDate();
+        const mesFinalizacion = fechaFinalizacion.getMonth() + 1;
+        const anioFinalizacion = fechaFinalizacion.getFullYear();
+        const fechaCreacionFormateada = `${diaCreacion}/${mesCreacion}/${anioCreacion}`;
+        const fechaFinalizacionFormateada = `${diaFinalizacion}/${mesFinalizacion}/${anioFinalizacion}`;
+        tarea.create_date = fechaCreacionFormateada;
+        tarea.ending_date = fechaFinalizacionFormateada;
+    });
     const numeroTareas = await Tarea.countDocuments({estado: true});
     res.json({
         msg: `Tareas obtenidas ${numeroTareas}`,
@@ -14,6 +29,19 @@ const getUnaTarea = async (req, res = response) => {
     const {id} = req.params;
     const {estado, nombre, descripcion, create_date, ending_date, asignados, proyecto, estado_Tarea} = await Tarea.findById(id);
 
+    //cambiar el formato de la fecha de creacion y de finalizacion
+    const fechaCreacion = new Date(create_date);
+    const fechaFinalizacion = new Date(ending_date);
+    const diaCreacion = fechaCreacion.getDate();
+    const mesCreacion = fechaCreacion.getMonth() + 1;
+    const anioCreacion = fechaCreacion.getFullYear();
+    const diaFinalizacion = fechaFinalizacion.getDate();
+    const mesFinalizacion = fechaFinalizacion.getMonth() + 1;
+    const anioFinalizacion = fechaFinalizacion.getFullYear();
+    const fechaCreacionFormateada = `${diaCreacion}/${mesCreacion}/${anioCreacion}`;
+    const fechaFinalizacionFormateada = `${diaFinalizacion}/${mesFinalizacion}/${anioFinalizacion}`;
+
+
     if (!estado) {
         return res.status(400).json({
             msg: 'La tarea no existe'
@@ -22,11 +50,36 @@ const getUnaTarea = async (req, res = response) => {
     res.json({
         nombre,
         descripcion,
-        create_date,
-        ending_date,
+        fechaCreacionFormateada,
+        fechaFinalizacionFormateada,
         asignados,
         proyecto,
         estado_Tarea
+    });
+}
+
+const getTareasPorProyecto = async (req, res = response) => {
+    const {id} = req.params;
+    const tareas = await Tarea.find({estado: true, proyecto: id}).populate('asignados', 'nombre _id').populate('proyecto', 'nombre');
+    const numeroTareas = await Tarea.countDocuments({estado: true, proyecto: id});
+    tareas.forEach(tarea => {
+        const fechaCreacion = new Date(tarea.create_date);
+        const fechaFinalizacion = new Date(tarea.ending_date);
+        const diaCreacion = fechaCreacion.getDate();
+        const mesCreacion = fechaCreacion.getMonth() + 1;
+        const anioCreacion = fechaCreacion.getFullYear();
+        const diaFinalizacion = fechaFinalizacion.getDate();
+        const mesFinalizacion = fechaFinalizacion.getMonth() + 1;
+        const anioFinalizacion = fechaFinalizacion.getFullYear();
+        const fechaCreacionFormateada = `${diaCreacion}/${mesCreacion}/${anioCreacion}`;
+        const fechaFinalizacionFormateada = `${diaFinalizacion}/${mesFinalizacion}/${anioFinalizacion}`;
+        tarea.create_date = fechaCreacionFormateada;
+        tarea.ending_date = fechaFinalizacionFormateada;
+        console.log(fechaCreacionFormateada);
+    });
+    res.json({
+        msg: `Tareas obtenidas ${numeroTareas}`,
+        tareas
     });
 }
 
@@ -64,5 +117,6 @@ module.exports = {
     getUnaTarea,
     crearTarea,
     actualizarTarea,
-    eliminarTarea
+    eliminarTarea,
+    getTareasPorProyecto
 }

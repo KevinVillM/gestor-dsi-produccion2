@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const { dbConnection } = require('../database/configDB');
 const cors = require('cors');
+const fileUpload = require('express-fileupload');
 
 
 class Server{
@@ -12,7 +13,8 @@ class Server{
             usuariosPath: '/api/usuarios',
             usuarioAuthPath: '/api/auth',
             proyestosPath: '/api/proyectos',
-            tareasPath: '/api/tareas'
+            tareasPath: '/api/tareas',
+            uploadsPath: '/api/uploads'
         }
 
         // Conectar a base de datos
@@ -23,6 +25,8 @@ class Server{
 
         // Rutas de mi aplicación
         this.routes();
+
+
     }
 
     async conectarDB(){
@@ -39,6 +43,12 @@ class Server{
         // Directorio público
         this.app.use(express.static('public'));
 
+                //Carga de archivos
+                this.app.use(fileUpload({
+                    useTempFiles : true,
+                    tempFileDir : '/tmp/'
+                }));
+
     }
 
     routes(){
@@ -46,6 +56,7 @@ class Server{
         this.app.use(this.path.usuarioAuthPath, require('../routes/auth'));
         this.app.use(this.path.proyestosPath, require('../routes/proyectos'));
         this.app.use(this.path.tareasPath, require('../routes/tareas'));
+        this.app.use(this.path.uploadsPath, require('../routes/uploads'));
     }
 
 

@@ -1,0 +1,19 @@
+#file-uploader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #upload-label {
+    font-size: 16px;
+  }
+  
+  #file-input {
+    display: none;
+  }
+  

@@ -1,10 +1,11 @@
 const Proyecto = require('../models/proyecto');
-const Role = require('../models/role');
+const Rol = require('../models/rol');
 const Usuario = require('../models/usuario');
 const Tarea = require('../models/tarea');
 
+
 const esRolValido = async(rol) => {
-    const existeRol = await Role.findOne({rol})
+    const existeRol = await Rol.findOne({rol})
     if(!existeRol){
         throw new Error(`El rol ${rol} no es valido`)
     }
@@ -45,11 +46,28 @@ const tareaPorID = async(id) => {
     }
 }
 
+const rolPorID = async(id) => {
+    const rol = await Rol.findById(id);
+    if(!rol){
+        throw new Error(`El rol con ${id} no existe`)
+    }
+}
+
+//validar si el rol ya existe
+const rolExiste = async(rol) => {
+    const existeRol = await Rol.findOne({rol});
+    if(existeRol){
+        throw new Error(`El rol ${rol} ya existe`)
+    }
+}
+
 module.exports = {
     esRolValido,
     emailExiste,
     usuarioPorID,
     proyectoPorID,
     tareaPorID,
-    emailNoExiste
+    emailNoExiste,
+    rolPorID,
+    rolExiste
 }

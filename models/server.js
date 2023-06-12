@@ -14,7 +14,8 @@ class Server{
             usuarioAuthPath: '/api/auth',
             proyestosPath: '/api/proyectos',
             tareasPath: '/api/tareas',
-            uploadsPath: '/api/uploads'
+            uploadsPath: '/api/uploads',
+            rolPath: '/api/rol',
         }
 
         // Conectar a base de datos
@@ -57,6 +58,7 @@ class Server{
         this.app.use(this.path.proyestosPath, require('../routes/proyectos'));
         this.app.use(this.path.tareasPath, require('../routes/tareas'));
         this.app.use(this.path.uploadsPath, require('../routes/uploads'));
+        this.app.use(this.path.rolPath, require('../routes/rol'));
     }
 
 

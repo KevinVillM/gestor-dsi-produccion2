@@ -30,10 +30,11 @@ const getUnaTarea = async (req, res = response) => {
     const {id} = req.params;
     const {estado, nombre, descripcion, create_date, ending_date, asignados, proyecto, estado_Tarea} = await Tarea.findById(id);
 
+    /*
     //cambiar el formato de la fecha de creacion y de finalizacion
     const fechaCreacionFormateada = cambiarFormatoFecha(create_date);
     const fechaFinalizacionFormateada = cambiarFormatoFecha(ending_date);
-
+*/
 
     if (!estado) {
         return res.status(400).json({
@@ -75,6 +76,7 @@ const formatearFecha = (fecha) => {
 const crearTarea = async (req, res = response) => {
     const {_id, ...resto} = req.body;
 
+    /*
     //validar formato de fecha dd/mm/aaaa verifica que cada parte este separada por /
     if (!resto.create_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/) || !resto.ending_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
         return res.status(400).json({
@@ -87,7 +89,7 @@ const crearTarea = async (req, res = response) => {
     const fechaFinalizacion = formatearFecha(resto.ending_date);
     resto.create_date = fechaCreacion;
     resto.ending_date = fechaFinalizacion;
-
+*/
     const tarea =await new Tarea(resto);
     await tarea.save();
     res.json({
@@ -100,7 +102,7 @@ const actualizarTarea = async (req, res = response) => {
     const {id} = req.params;
     const {nombre, descripcion, asignado, ending_date,create_date} = req.body;
 
-
+/*
         //validar formato de fecha dd/mm/aaaa verifica que cada parte este separada por /
         if (!resto.create_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/) || !resto.ending_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
             return res.status(400).json({
@@ -113,6 +115,8 @@ const actualizarTarea = async (req, res = response) => {
     const fechaFinalizacion = formatearFecha(ending_date);
     create_date = fechaCreacion;
     ending_date = fechaFinalizacion;
+
+ */
     const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignado, ending_date,create_date});
     res.json({
         tarea

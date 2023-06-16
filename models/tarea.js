@@ -25,10 +25,10 @@ const TareaSchema = Schema({
         type: Date,
         default: Date.now
     },
-    asignados: [{
+    asignados: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
-    }],
+    },
     proyecto: {
         type: Schema.Types.ObjectId,
         ref: 'Proyecto',

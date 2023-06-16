@@ -44,8 +44,8 @@ const getUnaTarea = async (req, res = response) => {
     res.json({
         nombre,
         descripcion,
-        fechaCreacionFormateada,
-        fechaFinalizacionFormateada,
+        create_date,
+        ending_date,
         asignados,
         proyecto,
         estado_Tarea

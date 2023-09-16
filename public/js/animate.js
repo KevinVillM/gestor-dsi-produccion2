@@ -28,7 +28,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 // Agregar un una pleca que gire mientras se sube el archivo
-await fetch("http://localhost:8080/api/uploads/64500a36140b2e6f85fd87d0", requestOptions)
+await fetch("https://gestor-dsi-produccion2-production.up.railway.app/api/uploads/64500a36140b2e6f85fd87d0", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));

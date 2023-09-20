@@ -3,7 +3,7 @@ const { check } = require('express-validator');
 
 const { validarCampos, validarJWT } = require('../middlewares');
 
-const { getProyectos, crearProyecto, actualizarProyecto, eliminarProyecto, getUnProyecto, getProyectosPorUsuarioCreador, getProyectosPorUsuarioColaborador, getProyectosPorUsuario } = require('../controllers/proyecto');
+const { getProyectos, crearProyecto, actualizarProyecto, eliminarProyecto, getUnProyecto, getProyectosPorUsuarioCreador, getProyectosPorUsuarioColaborador, getProyectosPorUsuario, contarProyectosPorUsuario, contarProyectosEnProceso, contarProyectosFinalizados, contarProyectosPendientes, estadistica, getUsuariosColaboradores } = require('../controllers/proyecto');
 const { proyectoPorID } = require('../helpers/db-validations');
 
 const router = Router();
@@ -41,6 +41,18 @@ router.post('/', [
     check('nombre', 'El nombre del proyecto es obligatorio').not().isEmpty(),
     validarCampos
 ], crearProyecto);
+
+router.get('/colaboradores/:id', [
+    validarJWT,
+    check('id', 'No es un ID valido').isMongoId(),
+    validarCampos
+], getUsuariosColaboradores);
+
+router.get('/estadistica/:id', [
+    validarJWT,
+    check('id', 'No es un ID valido').isMongoId(),
+    validarCampos
+], estadistica);
 
 router.put('/:id', [
     validarJWT,

@@ -31,6 +31,7 @@ router.get('/email/:email', [
 router.put('/:id', [
     check('id', 'No es un ID valido').isMongoId(),
     check('id').custom(usuarioPorID),
+    check('rol').custom(esRolValido),
     validarCampos
 ], usuariosPut);
 

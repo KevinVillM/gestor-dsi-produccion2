@@ -29,14 +29,14 @@ const login = async(req, res = response) => {
         }
         // Generar el JWT
         const token = await generarJWT(usuario.id);
-        console.log(token);
+
         res.json({
             usuario,
             token
         });
 
     } catch (error) {
-        console.log(error);
+
         res.status(500).json({
             msg: 'Hable con el administrador'
         });

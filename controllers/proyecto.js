@@ -46,21 +46,19 @@ const getUsuariosColaboradores = async (req, res = response) => {
     const userColab = await Proyecto.find({estado: true, propietario: id}).populate('colaboradores', 'nombre img');
 
     //obtener solo los colaboradores de los proyectos ignorando los campos de colaboradores vacios
-    const colaboradores = userColab.map((proyecto) => {
-        return proyecto.colaboradores; 
+    const colaboradores = userColab.filter((proyecto) => {
+        return proyecto.colaboradores.length > 0;
+    }).map((proyecto) => {
+        return proyecto.colaboradores;
     });
 
-    //Devolver un array con los campos nombre y img de los colaboradores
-    const colaboradoresFiltrados = colaboradores.map((colaborador) => {
-        return colaborador.map((colab) => {
-            return {nombre: colab.nombre, img: colab.img};
-        });
-    });
+    const colaboradoresArrayLimpio = colaboradores.flat();
 
-    res.json({
-        msg: 'get API - controlador',
-        colaboradoresFiltrados
-    });
+    console.log(colaboradoresArrayLimpio);
+
+    res.json(
+        colaboradoresArrayLimpio
+    );
 }
 
 const getProyectosPorUsuarioCreador = async (req, res = response) => {

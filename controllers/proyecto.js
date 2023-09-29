@@ -40,26 +40,30 @@ const getProyectosPorUsuarioColaborador = async (req, res = response) => {
     });
 }
 
-//Obtener todos los usuarios colaboradores de los proyectos de un usuario propietario
 const getUsuariosColaboradores = async (req, res = response) => {
-    const {id} = req.params;
-    const userColab = await Proyecto.find({estado: true, propietario: id}).populate('colaboradores', 'nombre img');
+    const { id } = req.params;
 
-    //obtener solo los colaboradores de los proyectos ignorando los campos de colaboradores vacios
-    const colaboradores = userColab.filter((proyecto) => {
-        return proyecto.colaboradores.length > 0;
-    }).map((proyecto) => {
-        return proyecto.colaboradores;
-    });
+    try {
+        const userColab = await Proyecto.find({
+            estado: true,
+            propietario: id
+        }).populate('colaboradores', 'nombre img');
 
-    const colaboradoresArrayLimpio = colaboradores.flat();
+        // Filtrar colaboradores cuyo _id no sea igual al del propietario
+        const colaboradores = userColab
+            .filter((proyecto) => proyecto.colaboradores.length > 0)
+            .map((proyecto) => proyecto.colaboradores.filter((colaborador) => colaborador._id.toString() !== id));
 
-    console.log(colaboradoresArrayLimpio);
+        const colaboradoresArrayLimpio = colaboradores.flat();
 
-    res.json(
-        colaboradoresArrayLimpio
-    );
-}
+        res.json(colaboradoresArrayLimpio);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+};
+
+
 
 const getProyectosPorUsuarioCreador = async (req, res = response) => {
     const {id} = req.params;

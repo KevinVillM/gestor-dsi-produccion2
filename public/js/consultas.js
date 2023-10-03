@@ -54,12 +54,12 @@
 // obtenerUsuario();
 //obtenerProyectos();
 
-const logearUsuario = async () => {
+const actualizarUsuario = async () => {
 
-  var raw = "{\r\n    \"email\":\"emailds@gmail.com\",\r\n    \"password\":\"123456\"\r\n}";
+  var raw = "{\r\n    \"nombre\": \"Josue VILLALTA\",\r\n    \"email\":\"emailds@gmail.com\",\r\n    \"password\":\"123456\",\r\n    \"img\":\"http://imagen\",\r\n    \"rol\":\"Diseñador\",\r\n    \"estado\": true,\r\n    \"google\": false\r\n}";
 
   var requestOptions = {
-    method: 'POST',
+    method: 'PUT',
     body: raw,
     redirect: 'follow',
     headers: {
@@ -67,11 +67,11 @@ const logearUsuario = async () => {
     }
   };
   
-  await fetch("http://localhost:8080/api/auth/login", requestOptions)
+  fetch("https://gestor-dsi-produccion2-production.up.railway.app/api/usuarios/644ffa6c27d474ca5aa764d5", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
 
 }
 
-logearUsuario();
+actualizarUsuario();

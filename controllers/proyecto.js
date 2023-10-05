@@ -88,7 +88,11 @@ const getProyectosPorUsuario = async (req, res = response) => {
 
 const getUnProyecto = async (req, res = response) => {
     const {id} = req.params;
-    const proyecto = await Proyecto.findById(id).populate('colaboradores', 'nombre img');
+    const {estado, ...resto} = await Proyecto.findById(id).populate('colaboradores', 'nombre _id');
+   /* resto.create_date = cambiarFormatoFecha(resto.create_date);
+    resto.ending_date = cambiarFormatoFecha(resto.ending_date);
+*/
+    if (!estado) {
 
     if (!proyecto.estado) {
         return res.status(400).json({
@@ -96,12 +100,8 @@ const getUnProyecto = async (req, res = response) => {
         });
     }
     res.json({
-        nombre: proyecto.nombre,
-        descripcion: proyecto.descripcion,
-        colaboradores: proyecto.colaboradores,
-        fecha_final: proyecto.ending_date,
-        fecha_creacion: proyecto.create_date,
-        estado: proyecto.estado_Proyecto,
+        msg: 'get API - controlador',
+        resto
     });
 }
 

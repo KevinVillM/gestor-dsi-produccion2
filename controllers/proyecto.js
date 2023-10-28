@@ -88,7 +88,7 @@ const getProyectosPorUsuario = async (req, res = response) => {
 
 const getUnProyectoPorId = async (req, res = response) => {
     const {id} = req.params;
-    const proyecto = await Proyecto.findById(id).populate('colaboradores', 'nombre img');
+    const proyecto = await Proyecto.findById(id).populate('colaboradores', 'nombre img imail');
 
     if (!proyecto.estado) {
         return res.status(400).json({

@@ -54,7 +54,7 @@ const getUnaTarea = async (req, res = response) => {
 
 const getTareasPorProyecto = async (req, res = response) => {
     const {id} = req.params;
-    const tareas = await Tarea.find({estado: true, proyecto: id}).populate('asignados', 'nombre _id').populate('proyecto', 'nombre');
+    const tareas = await Tarea.find({estado: true, proyecto: id}).populate('asignados', 'nombre _id img').populate('proyecto', 'nombre');
     const numeroTareas = await Tarea.countDocuments({estado: true, proyecto: id});
     res.json({
         msg: `Tareas obtenidas ${numeroTareas}`,

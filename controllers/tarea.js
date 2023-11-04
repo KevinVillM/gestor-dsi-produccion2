@@ -2,6 +2,26 @@ const {response} = require('express');
 const Tarea = require('../models/tarea');
 
 
+const estadistica = async (req, res = response) => {
+//devuelve la cantidad de tareas que tiene un proyecto en proceso, finalizado y no iniciado
+    const {id} = req.params;
+    const tareas = await Tarea.find({estado: true, proyecto: id}).populate('asignados', 'nombre _id');
+    const cantidadTareas = tareas.length;
+    const tareasEnProceso = await Tarea.find({estado: true, proyecto: id, estado_Tarea: 'En proceso'}).populate('asignados', 'nombre _id');
+    const cantidadTareasEnProceso = tareasEnProceso.length;
+    const tareasFinalizadas = await Tarea.find({estado: true, proyecto: id, estado_Tarea: 'Finalizado'}).populate('asignados', 'nombre _id');
+    const cantidadTareasFinalizadas = tareasFinalizadas.length;
+    const tareasPendientes = await Tarea.find({estado: true, proyecto: id, estado_Tarea: 'No iniciado'}).populate('asignados', 'nombre _id');
+    const cantidadTareasPendientes = tareasPendientes.length;
+    res.json({
+        msg: 'get API - controlador',
+        cantidadTareas,
+        cantidadTareasEnProceso,
+        cantidadTareasFinalizadas,
+        cantidadTareasPendientes
+    });
+}
+
 
 //Cambiar el formato de date de mongo a formato dd/mm/aaaa
 const cambiarFormatoFecha = (fecha) => {
@@ -138,5 +158,6 @@ module.exports = {
     crearTarea,
     actualizarTarea,
     eliminarTarea,
-    getTareasPorProyecto
+    getTareasPorProyecto,
+    estadistica
 }

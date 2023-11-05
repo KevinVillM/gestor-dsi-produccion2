@@ -1,5 +1,6 @@
 const {response} = require('express');
 const Tarea = require('../models/tarea');
+const {actualizarPorcentaje} = require('../controllers/proyecto');
 
 
 const estadistica = async (req, res = response) => {
@@ -112,6 +113,15 @@ const crearTarea = async (req, res = response) => {
 */
     const tarea =await new Tarea(resto);
     await tarea.save();
+
+    //actualizar porcentaje de avance del proyecto
+    try {
+        actualizarPorcentaje(resto.proyecto);
+    } catch (error) {
+        console.log(error);
+    }
+
+
     res.json({
         msg: `Tarea ${tarea.nombre} creada`,
         tarea
@@ -122,22 +132,15 @@ const actualizarTarea = async (req, res = response) => {
     const {id} = req.params;
     const {nombre, descripcion, asignado, ending_date,create_date} = req.body;
 
-/*
-        //validar formato de fecha dd/mm/aaaa verifica que cada parte este separada por /
-        if (!resto.create_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/) || !resto.ending_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
-            return res.status(400).json({
-                msg: 'El formato de la fecha de creacion no es correcto'
-            });
-        }
-
-    //Formatear la fecha de creacion y de finalizacion
-    const fechaCreacion = formatearFecha(create_date);
-    const fechaFinalizacion = formatearFecha(ending_date);
-    create_date = fechaCreacion;
-    ending_date = fechaFinalizacion;
-
- */
     const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignado, ending_date,create_date});
+
+        //actualizar porcentaje de avance del proyecto
+        try {
+            console.log("El metodo ejecuto la funcion un:///////////////////");
+            actualizarPorcentaje(tarea.proyecto);
+        } catch (error) {
+            console.log("El metodo devulvio un:///////////////////"+error);
+        }
     res.json({
         tarea
     });

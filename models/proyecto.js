@@ -17,6 +17,10 @@ const ProyectoSchema = Schema({
         type: String,
         default: 'En proceso'
     },
+    porcentaje: {
+        type: Number,
+        default: 0
+    },
     create_date: {
         type: Date,
         default: Date.now

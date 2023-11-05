@@ -1,5 +1,6 @@
 const {response} = require('express');
 const Proyecto = require('../models/proyecto');
+const Tarea = require('../models/tarea');
 
 const getProyectos = async (req, res = response) => {
     const proyectos = await Proyecto.find({estado: true}).populate('colaboradores', 'nombre _id');
@@ -102,6 +103,8 @@ const getUnProyectoPorId = async (req, res = response) => {
         fecha_final: proyecto.ending_date,
         fecha_creacion: proyecto.create_date,
         estado: proyecto.estado_Proyecto,
+        propietario: proyecto.propietario,
+        porcentaje: proyecto.porcentaje,
     });
 }
 
@@ -120,6 +123,23 @@ const getUnProyecto = async (req, res = response) => {
         msg: 'get API - controlador',
         resto
     });
+}
+
+
+//actualizar porcentaje de avance del proyecto
+const actualizarPorcentaje = async (id) => {
+
+    const tareas = await Tarea.find({estado: true, proyecto: id});
+    const cantidadTareas = tareas.length;
+    if (cantidadTareas === 0) {
+        return;
+    }
+    const tareasFinalizadas = await Tarea.find({estado: true, proyecto: id, estado_Tarea: 'Finalizado'});
+    const cantidadTareasFinalizadas = tareasFinalizadas.length;
+    const porcentajeAvance = (cantidadTareasFinalizadas * 100) / cantidadTareas;
+    const porcentajeAvanceNumber = Number(porcentajeAvance).toFixed(2);
+    const proyecto = await Proyecto.findByIdAndUpdate(id, {porcentaje: porcentajeAvanceNumber});
+    return proyecto;
 }
 
 
@@ -214,5 +234,6 @@ module.exports = {
     getProyectosPorUsuario,
     estadistica,
     getUsuariosColaboradores,
-    getUnProyectoPorId
+    getUnProyectoPorId,
+    actualizarPorcentaje,
 }

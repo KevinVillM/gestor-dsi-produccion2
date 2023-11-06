@@ -16,6 +16,7 @@ class Server{
             tareasPath: '/api/tareas',
             uploadsPath: '/api/uploads',
             rolPath: '/api/rol',
+            notificacionesPath: '/api/notificaciones'
         }
 
         // Conectar a base de datos
@@ -61,6 +62,7 @@ class Server{
         this.app.use(this.path.tareasPath, require('../routes/tareas'));
         this.app.use(this.path.uploadsPath, require('../routes/uploads'));
         this.app.use(this.path.rolPath, require('../routes/rol'));
+        this.app.use(this.path.notificacionesPath, require('../routes/notificaciones'));
     }
 
 

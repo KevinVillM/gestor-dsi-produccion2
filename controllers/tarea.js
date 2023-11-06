@@ -1,6 +1,7 @@
 const {response} = require('express');
 const Tarea = require('../models/tarea');
 const {actualizarPorcentaje} = require('../controllers/proyecto');
+const Notificacion = require('../models/notificacion');
 
 
 const estadistica = async (req, res = response) => {
@@ -24,18 +25,6 @@ const estadistica = async (req, res = response) => {
 }
 
 
-//Cambiar el formato de date de mongo a formato dd/mm/aaaa
-const cambiarFormatoFecha = (fecha) => {
-    const fechaCreacion = new Date(fecha);
-    const diaCreacion = fechaCreacion.getDate();
-    const mesCreacion = fechaCreacion.getMonth(); // Restar 1 al mes
-    const anioCreacion = fechaCreacion.getFullYear();
-    const fechaCreacionFormateada = `${diaCreacion}/${mesCreacion + 1}/${anioCreacion}`; // Sumar 1 al mes al mostrarlo
-    return fechaCreacionFormateada;
-}
-
-
-
 const getTareas = async (req, res = response) => {
     let tareas = await Tarea.find({estado: true}).populate('asignados', 'nombre -_id').populate('proyecto', 'nombre');
     const numeroTareas = await Tarea.countDocuments({estado: true});
@@ -51,11 +40,6 @@ const getUnaTarea = async (req, res = response) => {
     const {id} = req.params;
     const {estado, nombre, descripcion, create_date, ending_date, asignados, proyecto, estado_Tarea} = await Tarea.findById(id);
 
-    /*
-    //cambiar el formato de la fecha de creacion y de finalizacion
-    const fechaCreacionFormateada = cambiarFormatoFecha(create_date);
-    const fechaFinalizacionFormateada = cambiarFormatoFecha(ending_date);
-*/
 
     if (!estado) {
         return res.status(400).json({
@@ -97,31 +81,25 @@ const formatearFecha = (fecha) => {
 const crearTarea = async (req, res = response) => {
     const {_id, ...resto} = req.body;
 
-    /*
-    //validar formato de fecha dd/mm/aaaa verifica que cada parte este separada por /
-    if (!resto.create_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/) || !resto.ending_date.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) {
-        return res.status(400).json({
-            msg: 'El formato de la fecha de creacion no es correcto'
-        });
-    }
-
-    //Formatear la fecha de creacion y de finalizacion
-    const fechaCreacion = formatearFecha(resto.create_date);
-    const fechaFinalizacion = formatearFecha(resto.ending_date);
-    resto.create_date = fechaCreacion;
-    resto.ending_date = fechaFinalizacion;
-*/
     const tarea =await new Tarea(resto);
     await tarea.save();
 
-    //actualizar porcentaje de avance del proyecto
+
     try {
         actualizarPorcentaje(resto.proyecto);
     } catch (error) {
         console.log(error);
     }
 
+    //Crear una notificacion para el asignado de la tarea
 
+    try {
+        const notificacion =await new Notificacion({titulo: `Nueva tarea asignada: ${resto.nombre}`, descripcion: resto.descripcion, fecha: resto.create_date, usuario: resto.asignados, proyecto: resto.proyecto, tarea: tarea._id});
+        await notificacion.save();
+    } catch (error) {
+        console.log(error);
+    }
+  
     res.json({
         msg: `Tarea ${tarea.nombre} creada`,
         tarea
@@ -130,13 +108,12 @@ const crearTarea = async (req, res = response) => {
 
 const actualizarTarea = async (req, res = response) => {
     const {id} = req.params;
-    const {nombre, descripcion, asignado, ending_date,create_date} = req.body;
+    const {nombre, descripcion, asignado, ending_date,create_date, estado_Tarea} = req.body;
 
-    const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignado, ending_date,create_date});
+    const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignado, ending_date,create_date, estado_Tarea});
 
         //actualizar porcentaje de avance del proyecto
         try {
-            console.log("El metodo ejecuto la funcion un:///////////////////");
             actualizarPorcentaje(tarea.proyecto);
         } catch (error) {
             console.log("El metodo devulvio un:///////////////////"+error);

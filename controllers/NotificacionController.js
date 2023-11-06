@@ -4,6 +4,7 @@ const Notificacion = require('../models/notificacion');
 const Usuario = require('../models/usuario');
 const Proyecto = require('../models/proyecto');
 const Tarea = require('../models/tarea');
+const usuario = require('../models/usuario');
 
 const getNotificaciones = async (req, res) => {
     const notificaciones = await Notificacion.find({ usuario: req.uid, leida: false })
@@ -93,7 +94,8 @@ const deleteNotificacion = async (req, res) => {
 }
 
 const deleteNotificacionesUsuario = async (req, res) => {
-    const { usuario } = req.params;
+    const { id } = req.params;
+    const usuario = id;
     const notificaciones = await Notificacion.deleteMany({ usuario });
     res.json({
         ok: true,

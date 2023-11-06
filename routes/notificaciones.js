@@ -5,7 +5,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
-const { getNotificaciones, getNotificacionesLeidas, getNotificacionesProyecto, getNotificacionesTarea, postNotificacion, putNotificacion, deleteNotificacion, getNotificacionesUsuario } = require('../controllers/NotificacionController');
+const { getNotificaciones, getNotificacionesLeidas, getNotificacionesProyecto, getNotificacionesTarea, postNotificacion, putNotificacion, deleteNotificacion, getNotificacionesUsuario, deleteNotificacionesUsuario } = require('../controllers/NotificacionController');
 
 router.get('/', validarJWT, getNotificaciones);
 
@@ -21,6 +21,6 @@ router.post('/', validarJWT, postNotificacion);
 
 router.put('/:id', validarJWT, putNotificacion);
 
-router.delete('/:id', validarJWT, deleteNotificacion);
+router.delete('/:id', validarJWT, deleteNotificacionesUsuario);
 
 module.exports = router;

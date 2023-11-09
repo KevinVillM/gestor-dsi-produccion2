@@ -108,9 +108,9 @@ const crearTarea = async (req, res = response) => {
 
 const actualizarTarea = async (req, res = response) => {
     const {id} = req.params;
-    const {nombre, descripcion, asignado, ending_date,create_date, estado_Tarea} = req.body;
+    const {nombre, descripcion, asignados, ending_date,create_date, estado_Tarea} = req.body;
 
-    const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignado, ending_date,create_date, estado_Tarea});
+    const tarea = await Tarea.findByIdAndUpdate(id, {nombre, descripcion, asignados, ending_date,create_date, estado_Tarea});
 
         //actualizar porcentaje de avance del proyecto
         try {
